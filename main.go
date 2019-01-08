@@ -13,6 +13,7 @@ func main() {
 
 }
 
+//Mortgage Calculator, params are HOUSE PRICE, INTEREST RATE, ANNUAL PROPERTY TAX, MONTHLY HOA, MONTHLY HOMEOWNERS INSURANCE
 func monthlyPayment(housePrice float64, interestRate float64, propertyTax float64, hoa float64, homeInsurance float64) float64 {
 	//house + va funding fee
 	initialPrincipal := (housePrice * vaFundingFee) + housePrice
