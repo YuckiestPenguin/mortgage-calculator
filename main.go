@@ -8,9 +8,29 @@ import (
 const vaFundingFee float64 = 0.0215
 const lengthOfLoan float64 = 360
 
-func main() {
-	fmt.Printf("%.2f", monthlyPayment(450000, 4.375, 4422, 82, 75))
+var housePrice float64
+var interestRate float64
+var propertyTax float64
+var hoa float64
+var homeInsurance float64
 
+func main() {
+	fmt.Println("How much is the house?")
+	fmt.Scan(&housePrice)
+
+	fmt.Println("What is your current interest rate?")
+	fmt.Scan(&interestRate)
+
+	fmt.Println("How much will your ANNUAL Property Tax be?")
+	fmt.Scan(&propertyTax)
+
+	fmt.Println("How much will your MONTHLY hoa fee be?")
+	fmt.Scan(&hoa)
+
+	fmt.Println("How much will your MONTHLY Homeowner's Insurance be?")
+	fmt.Scan(&homeInsurance)
+
+	fmt.Printf("%.2f", monthlyPayment(housePrice, 4.375, 4422, 82, 75))
 }
 
 //Mortgage Calculator, params are HOUSE PRICE, INTEREST RATE, ANNUAL PROPERTY TAX, MONTHLY HOA, MONTHLY HOMEOWNERS INSURANCE
@@ -22,7 +42,7 @@ func monthlyPayment(housePrice float64, interestRate float64, propertyTax float6
 	annualInterest := interestRate / 1200
 
 	//Take all data and boils down to a multiplier applied to principal to determine monthly payment
-	multiplierDate := math.Pow((1 + annualInterest), lengthOfLoan)
+	multiplierDate := math.Pow(1+annualInterest, lengthOfLoan)
 
 	//applies multiplier to loan principal
 	multiplierToLoanPrincipal := (multiplierDate * annualInterest) / (multiplierDate - 1)
@@ -31,7 +51,9 @@ func monthlyPayment(housePrice float64, interestRate float64, propertyTax float6
 
 	fullPITI := monthlyMortgagePayment + (propertyTax / 12) + hoa + homeInsurance
 
-	fmt.Printf("Monthly Mortgage Payment => \t\t\t\t\t\t\t\t\t\t\t\t\t\t$%.2f\n", monthlyMortgagePayment)
-	fmt.Printf("Monthly Payment including Mortgage, Homeowner's Insurance, Property Tax, HOA => \t$%.2f\n", fullPITI)
+	fmt.Println("Monthly Mortgage Payment:")
+	fmt.Printf("$%.2f\n", monthlyMortgagePayment)
+	fmt.Println("Monthly Payment including Mortgage, Homeowner's Insurance, Property Tax, HOA:")
+	fmt.Printf("$%.2f\n", fullPITI)
 	return fullPITI
 }
